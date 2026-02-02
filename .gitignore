@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.angular/
+.angular/cache/
+coverage/
+*.log
+.vscode/
+.idea/
+
+# backend ignore (agar spring boot use kar rahe ho)
+target/
+build/
+out/
+
+.env
