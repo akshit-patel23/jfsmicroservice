@@ -1,0 +1,34 @@
+
+
+services:
+  discovery-server:
+    image: discovery-server:1.0
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+
+  auth-service:
+    image: auth-service:1.0
+    container_name: auth-service
+    ports:
+      - "8084:8084"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka
+
+  admin-service:
+    image: admin-service:1.0
+    container_name: admin-service
+    ports:
+      - "8085:8085"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka
+
+  api-gateway:
+    image: api-gateway:1.0
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka
